@@ -8,7 +8,7 @@ client_secret = os.environ.get('client_secret')
 
 # Create your views here.
 def index(request):
-    print(clinet_id)
+    print(client_id)
     return render(request, "crudapp/index.html")
 
 
