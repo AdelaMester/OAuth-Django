@@ -6,7 +6,7 @@ import urllib.parse
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
-redirect_uri
+redirect_uri = "https://oauth-crudapp.herokuapp.com/callback"
 
 
 # Create your views here.
