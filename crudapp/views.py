@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 import os
 from uuid import uuid4
 import urllib.parse
+import requests
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
