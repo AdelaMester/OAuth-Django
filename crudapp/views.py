@@ -4,6 +4,7 @@ import os
 from uuid import uuid4
 import urllib.parse
 import requests
+import json
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
@@ -51,7 +52,15 @@ def callback(request):
                  "client_secret": client_secret
                  }
         response = requests.post("https://github.com/login/oauth/access_token", data=post_data)
-        print("response.text: "+response.text)
-        return render(request, "crudapp/home.html")
+        at = response.text[13:53]
+        print(at)
+        name = username(at)
+        return render(request, "crudapp/home.html", name=name)
+
+def username(access_token):
+    headers = {"Authorization": "token " + str(access_token)}
+    response = requests.get("https://api.github.com/user", headers=headers)
+    name = response.json()
+    return name
 
 
