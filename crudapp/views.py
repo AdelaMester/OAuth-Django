@@ -54,7 +54,7 @@ def callback(request):
         response = requests.post("https://github.com/login/oauth/access_token", data=post_data)
         at = response.text[13:53]
         print(at)
-        request.session['access_token'] = at
+        request.django_session['access_token'] = at
         name = username(at)
         return render(request, "crudapp/home.html", {
             "name": name
