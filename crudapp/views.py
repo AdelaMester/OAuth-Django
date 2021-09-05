@@ -35,11 +35,22 @@ def request_identity(request):
               "response_type": "code",
               "redirect_uri": redirect_uri,
               "state": state,
-              "duration": "temporary",
               "scope": "user"
               }
     return HttpResponseRedirect('https://github.com/login/oauth/authorize?' + urllib.parse.urlencode(params))
 
 def callback(request):
     if request.method == 'GET':
+        code = request.GET.get('code')
+        state= request.GET.get('state')
+        post_data = {"grant_type": "authorization_code",
+                 "code": code,
+                 "redirect_uri": redirect_uri,
+                 "client_id": client_id,
+                 "client_secret": client_secret
+                 }
+        response = requests.post("https://github.com/login/oauth/access_token", data=post_data)
+        print("response.text: "+response.text)
         return render(request, "crudapp/home.html")
+
+
