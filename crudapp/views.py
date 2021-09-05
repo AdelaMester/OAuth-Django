@@ -13,6 +13,9 @@ redirect_uri = "https://oauth-crudapp.herokuapp.com/callback"
 def index(request):
     return render(request, "crudapp/index.html")
 
+def home(request):
+    if request.method == 'GET':
+        return render(request, "crudapp/home.html")
 
 def profile(request):
     if request.method == 'GET':
