@@ -5,6 +5,7 @@ from uuid import uuid4
 import urllib.parse
 import requests
 import json
+import psycopg2
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
@@ -54,8 +55,12 @@ def callback(request):
         response = requests.post("https://github.com/login/oauth/access_token", data=post_data)
         at = response.text[13:53]
         print(at)
-        request.django_session['access_token'] = at
+        #request.session['access_token'] = at
         name = username(at)
+        conn = psycopg2.connect("postgres://xymhfodqtzfhel:fda6eeca932a9e81a59fbf4e120314baf9f01dc81db9080d9451b6855895dd7e@ec2-34-251-245-108.eu-west-1.compute.amazonaws.com:5432/d77lot7q9l22r0")
+        cur = conn.cursor()
+        cur.execute("Insert into users(username,access_token) VALUES (%s,%s)",(name,at));
+        cur.query
         return render(request, "crudapp/home.html", {
             "name": name
         })

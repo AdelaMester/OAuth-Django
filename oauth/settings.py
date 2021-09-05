@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import django_heroku
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,8 +78,14 @@ WSGI_APPLICATION = 'oauth.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd77lot7q9l22r0',
+        'USER': 'xymhfodqtzfhel',
+        'PASSWORD': 'fda6eeca932a9e81a59fbf4e120314baf9f01dc81db9080d9451b6855895dd7e',
+        'HOST': 'ec2-34-251-245-108.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
