@@ -55,7 +55,9 @@ def callback(request):
         at = response.text[13:53]
         print(at)
         name = username(at)
-        return render(request, "crudapp/home.html", name=name)
+        return render(request, "crudapp/home.html", {
+            "name": name
+        })
 
 def username(access_token):
     headers = {"Authorization": "token " + str(access_token)}
