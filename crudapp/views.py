@@ -60,7 +60,7 @@ def callback(request):
         print(name)
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE username=%s", (username,))
+        cur.execute("SELECT * FROM users WHERE username=%s", (name,))
         row = cur.fetchone()
         if not row[0]:
             cur.execute("INSERT INTO users (username, access_token) VALUES (%s, %s)", (name, at));
