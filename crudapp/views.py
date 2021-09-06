@@ -26,7 +26,7 @@ def home(request):
 
 def profile(request):
     if request.method == 'GET':
-        if 'name' in request.session:
+        if 'name' not in request.session:
             HttpResponseRedirect('https://oauth-crudapp.herokuapp.com/')
         return render(request, "crudapp/profile.html")
 
