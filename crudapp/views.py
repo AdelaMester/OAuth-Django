@@ -57,10 +57,13 @@ def callback(request):
         print(at)
         #request.session['access_token'] = at
         name = username(at)
-        conn = psycopg2.connect("postgres://xymhfodqtzfhel:fda6eeca932a9e81a59fbf4e120314baf9f01dc81db9080d9451b6855895dd7e@ec2-34-251-245-108.eu-west-1.compute.amazonaws.com:5432/d77lot7q9l22r0")
+        conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
-        cur.execute("Insert into users(username,access_token) VALUES (%s,%s)",(name,at));
-        cur.query
+        cur.execute("SELECT * FROM users WHERE id=2");
+        data = cur.fetchall()
+        cur.commit()
+        cur.close()
+        print(data)
         return render(request, "crudapp/home.html", {
             "name": name
         })
