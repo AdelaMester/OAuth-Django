@@ -18,7 +18,9 @@ def index(request):
 
 def home(request):
     if request.method == 'GET':
-        return render(request, "crudapp/home.html")
+        return render(request, "crudapp/home.html", {
+            "name": name
+        })
 
 def profile(request):
     if request.method == 'GET':
@@ -56,7 +58,7 @@ def callback(request):
         at = response.text[13:53]
         print(at)
         #request.session['access_token'] = at
-        name = username(at)
+        global name = username(at)
         print(name)
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
