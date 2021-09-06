@@ -18,6 +18,7 @@ def index(request):
 
 def home(request):
     if request.method == 'GET':
+        print("session:"+str(request.session['name']))
         return render(request, "crudapp/home.html",{
             'name': request.session['name']
 
