@@ -58,10 +58,10 @@ def callback(request):
         #request.session['access_token'] = at
         name = username(at)
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+        print(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE id=2");
         data = cur.fetchall()
-        cur.commit()
         cur.close()
         print(data)
         return render(request, "crudapp/home.html", {
