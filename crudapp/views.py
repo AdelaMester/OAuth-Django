@@ -19,13 +19,13 @@ def index(request):
 def home(request):
     if request.method == 'GET':
         return render(request, "crudapp/home.html",{
-            'name': request.session.get['name']
+            'name': request.session['name']
 
         })
 
 def profile(request):
     if request.method == 'GET':
-        if not request.session.get['name']:
+        if not request.session['name']:
             HttpResponseRedirect("https://oauth-crudapp.herokuapp.com/")
         return render(request, "crudapp/profile.html")
 
