@@ -30,10 +30,10 @@ def profile(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name'],))
         profile_info = cur.fetchall()
-        username = profile_info['username']
-        address = profile_info['address']
-        contact_number = profile_info['contact_number']
         print(profile_info)
+        username = profile_info[1]
+        address = profile_info[3]
+        contact_number = profile_info[4]
         cur.close()
         conn.close()
         return render(request, "crudapp/profile.html", {
