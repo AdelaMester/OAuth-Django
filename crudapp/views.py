@@ -28,7 +28,7 @@ def profile(request):
     if request.method == 'GET':
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name'],))
+        cur.execute("SELECT * FROM details WHERE username=%s", (request.session['name'],))
         profile_info = cur.fetchone()
         print(profile_info)
         username = profile_info[1]
@@ -50,11 +50,11 @@ def updateprofile(request):
         cur = conn.cursor()
         if request.POST.get('Address'):
             address = request.POST.get('Address')
-            cur.execute("UPDATE users SET address =%s WHERE username=%s", (address, request.session['name']))
+            cur.execute("UPDATE details SET address =%s WHERE username=%s", (address, request.session['name']))
             conn.commit()
         else:
             number = request.POST.get('Contact_number')
-            cur.execute("UPDATE users SET contact_number =%s WHERE username=%s", (number, request.session['name']))
+            cur.execute("UPDATE details SET contact_number =%s WHERE username=%s", (number, request.session['name']))
             conn.commit()
         cur.close()
         conn.close()
@@ -72,7 +72,7 @@ def insertinformation(request):
         cur.execute("SELECT * FROM details WHERE username=%s", (request.session['name'],))
         row = cur.fetchone()
         if not row:
-            cur.execute("INSERT INTO details (username, address, contact_number) VALUES (%s, %s, %s)", (request.session['name'], address, number));
+            cur.execute("INSERT INTO details (username, address, contact_number) VALUES (%s, %s, %s)", (request.session['name'], address, number))
             conn.commit()
         cur.close()
         conn.close()
@@ -121,7 +121,7 @@ def callback(request):
         cur.execute("SELECT * FROM users WHERE username=%s", (name,))
         row = cur.fetchone()
         if not row[0]:
-            cur.execute("INSERT INTO users (username, access_token) VALUES (%s, %s)", (name, at));
+            cur.execute("INSERT INTO users (username, access_token) VALUES (%s, %s)", (name, at))
             conn.commit()
         cur.close()
         conn.close()
