@@ -28,12 +28,14 @@ def profile(request):
     if request.method == 'GET':
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE username=%s", (name,))
+        cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name']))
         profile_info = cur.fetchone()
         print(profile_info)
         cur.close()
         conn.close()
-        return render(request, "crudapp/profile.html")
+        return render(request, "crudapp/profile.html", {
+            "profile_info": profile_info
+        })
 
 def updateprofile(request):
     if request.method == 'GET':
