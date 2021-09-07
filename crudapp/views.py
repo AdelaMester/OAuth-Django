@@ -71,7 +71,7 @@ def insertinformation(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM details WHERE username=%s", (request.session['name'],))
         row = cur.fetchone()
-        if not row[0]:
+        if not row:
             cur.execute("INSERT INTO details (username, address, contact_number) VALUES (%s, %s, %s)", (request.session['name'], address, number));
             conn.commit()
         cur.close()
@@ -120,7 +120,7 @@ def callback(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s", (name,))
         row = cur.fetchone()
-        if not row:
+        if not row[0]:
             cur.execute("INSERT INTO users (username, access_token) VALUES (%s, %s)", (name, at));
             conn.commit()
         cur.close()
