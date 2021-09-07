@@ -26,7 +26,7 @@ def home(request):
 
 def profile(request):
     if request.method == 'GET':
-        if not request.session['name']:
+        if request.session['name'] is None:
             return HttpResponseRedirect("/")
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
