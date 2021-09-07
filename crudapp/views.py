@@ -53,7 +53,7 @@ def updateprofile(request):
             cur.execute("UPDATE users SET address =%s WHERE username=%s", (address, request.session['name']))
             conn.commit()
         else:
-            number = request.POST.get('Contact_number') 
+            number = request.POST.get('Contact_number')
             cur.execute("UPDATE users SET contact_number =%s WHERE username=%s", (number, request.session['name']))
             conn.commit()
         cur.close()
