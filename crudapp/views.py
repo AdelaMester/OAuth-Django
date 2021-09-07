@@ -18,7 +18,8 @@ def index(request):
 
 def home(request):
     if request.method == 'GET':
-        print("session:"+str(request.session['name']))
+        if 'name' not in request.session:
+            return HttpResponseRedirect("/")
         return render(request, "crudapp/home.html",{
             'name': request.session['name']
 
@@ -50,6 +51,8 @@ def profile(request):
         })
 
 def updateprofile(request):
+    if 'name' not in request.session:
+            return HttpResponseRedirect("/")
     if request.method == 'GET':
         return render(request, "crudapp/updateprofile.html")
     if request.method == 'POST':
@@ -69,6 +72,8 @@ def updateprofile(request):
 
 
 def insertinformation(request):
+    if 'name' not in request.session:
+            return HttpResponseRedirect("/")
     if request.method == 'GET':
         return render(request, "crudapp/insertinformation.html")
     if request.method == 'POST':
@@ -87,6 +92,8 @@ def insertinformation(request):
 
 
 def deleteinformation(request):
+    if 'name' not in request.session:
+            return HttpResponseRedirect("/")
     if request.method == 'GET':
         return render(request, "crudapp/deleteinformation.html")
     if request.method == 'POST':
