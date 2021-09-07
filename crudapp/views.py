@@ -29,12 +29,17 @@ def profile(request):
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name'],))
-        profile_info = cur.fetchone()
+        profile_info = cur.fetchall()
+        username = profile_info['username']
+        address = profile_info['address']
+        contact_number = profile_info['contact_number']
         print(profile_info)
         cur.close()
         conn.close()
         return render(request, "crudapp/profile.html", {
-            "profile_info": profile_info
+            "username": username,
+            "address": address,
+            "contact_number": contact_number
         })
 
 def updateprofile(request):
