@@ -6,7 +6,7 @@
 
 {% block main %}
 
-    <form method="post">
+    <form method="post"> {% csrf_token %}
         <input class="form-control" name="Address" placeholder="New Address" type="text"><button type="submit" formaction="/updateprofile/">Update Adress</button>
         <br><br>
         <input class="form-control" name="Contact_number" placeholder="New Contact Number" type="text"><button type="submit" formaction="/updateprofile/">Update Contact Number</button>
