@@ -7,8 +7,9 @@
 {% block main %}
     <h1>Delete Information</h1>
     <br>
-    <form action="/deleteinformation/" method="delete"> {% csrf_token %}
-        <button type="submit" id="deleteinformation">Delete Information</button>
+    <form action="/deleteinformation/" method="delete">
+        {% csrf_token %}
+        <button type="submit">Delete Information</button>
         <br><br>
     </form>
 
