@@ -64,6 +64,19 @@ def updateprofile(request):
 def insertinformation(request):
     if request.method == 'GET':
         return render(request, "crudapp/insertinformation.html")
+    if request.method == 'POST':
+        address = request.POST.get('Address')
+        number = request.POST.get('Contact_number')
+        conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM details WHERE username=%s", (request.session['name'],))
+        row = cur.fetchone()
+        if not row[0]:
+            cur.execute("INSERT INTO details (username, address, contact_number) VALUES (%s, %s, %s)", (request.session['name'], address, number));
+            conn.commit()
+        cur.close()
+        conn.close()
+        return HttpResponseRedirect("/profile/")
 
 
 def deleteinformation(request):
