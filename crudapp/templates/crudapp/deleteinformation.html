@@ -5,7 +5,12 @@
     {% endblock %}
 
 {% block main %}
-
-    To do
+    <h1>Delete Information</h1>
+    <br>
+    <form method="delete"> {% csrf_token %}
+        <button type="submit" id="address" formaction="/deleteinformation/">Adress</button>
+        <br><br>
+        <button type="submit" id="mobile" formaction="/deleteinformation/">Contact Number</button>
+    </form>
 
 {% endblock %}

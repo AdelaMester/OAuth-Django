@@ -1,0 +1,17 @@
+{% extends "crudapp/layout.html" %}
+
+    {% block title %}
+    Insert Information
+    {% endblock %}
+
+{% block main %}
+
+    <form action="/insertinformation/" method="post"> {% csrf_token %}
+        <input class="form-control" name="Address" placeholder="Address" type="text">
+        <br><br>
+        <input class="form-control" name="Contact_number" placeholder="Contact Number" type="text">
+        <button type="submit" >Insert Details</button>
+    </form>
+
+
+{% endblock %}

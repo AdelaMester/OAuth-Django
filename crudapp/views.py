@@ -53,7 +53,7 @@ def updateprofile(request):
             cur.execute("UPDATE users SET address =%s WHERE username=%s", (address, request.session['name']))
             conn.commit()
         else:
-            number = request.POST.get('Contact_number')
+            number = request.POST.get('Contact_number') 
             cur.execute("UPDATE users SET contact_number =%s WHERE username=%s", (number, request.session['name']))
             conn.commit()
         cur.close()
@@ -61,9 +61,21 @@ def updateprofile(request):
         return HttpResponseRedirect("/profile/")
 
 
+def insertinformation(request):
+    if request.method == 'GET':
+        return render(request, "crudapp/insertinformation.html")
+
+
 def deleteinformation(request):
     if request.method == 'GET':
         return render(request, "crudapp/deleteinformation.html")
+    onn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+    cur = conn.cursor()
+    if request.method == 'DELETE':
+        if request.POST.get('id') == 'address':
+            cur.execute("DELETE users SET address =%s WHERE username=%s", (address, request.session['name']))
+            conn.commit()
+
 
 def request_identity(request):
     state = str(uuid4())
