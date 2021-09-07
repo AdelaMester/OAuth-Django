@@ -5,6 +5,7 @@
     {% endblock %}
 
 {% block main %}
+    <h1>Update Information</h1>
 
     <form method="post"> {% csrf_token %}
         <input class="form-control" name="Address" placeholder="New Address" type="text"><button type="submit" formaction="/updateprofile/">Update Adress</button>

@@ -37,8 +37,8 @@ def profile(request):
             contact_number = profile_info[2]
         else:
             username = request.session['name']
-            address = "Not Set"
-            contact_number = "Not Set"
+            address = "Address not set"
+            contact_number = "Contact number not set"
         cur.close()
         conn.close()
         return render(request, "crudapp/profile.html", {
@@ -94,7 +94,7 @@ def deleteinformation(request):
         conn.commit()
         cur.close()
         conn.close()
-        return HttpResponseRedirect("/home/")
+        return HttpResponseRedirect("/profile/")
 
 def request_identity(request):
     state = str(uuid4())
