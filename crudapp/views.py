@@ -82,7 +82,7 @@ def insertinformation(request):
 def deleteinformation(request):
     if request.method == 'GET':
         return render(request, "crudapp/deleteinformation.html")
-    if request.method == 'DELETE':
+    if request.method == 'POST':
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
         cur.execute("DELETE FROM details WHERE username=%s", (request.session['name'],))
