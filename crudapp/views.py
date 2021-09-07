@@ -28,7 +28,7 @@ def profile(request):
     if request.method == 'GET':
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name']))
+        cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name'],))
         profile_info = cur.fetchone()
         print(profile_info)
         cur.close()
