@@ -40,7 +40,7 @@ def profile(request):
             conn.commit()
         cur.close()
         conn.close()
-        render(request,"crudapp/profile.html")
+        return render(request,"crudapp/profile.html")
 
 def updateprofile(request):
     if request.method == 'GET':
