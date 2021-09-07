@@ -26,13 +26,25 @@ def home(request):
 
 def profile(request):
     if request.method == 'GET':
-        if not 'name' in request.session:
-            HttpResponseRedirect('https://oauth-crudapp.herokuapp.com/')
         return render(request, "crudapp/profile.html")
+    if request.method == 'POST':
+        conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+        cur = conn.cursor()
+        if request.POST.get('Address'):
+            address = request.POST.get('Address')
+            cur.execute("UPDATE users SET address =%s WHERE username=%s", (address, request.session['name']))
+            conn.commit()
+        elif request.POST.get('Contact_number'):
+            number = request.POST.get('Contact_number')
+            cur.execute("UPDATE users SET contact_number =%s WHERE username=%s", (number, request.session['name']))
+            conn.commit()
+        cur.close()
+        conn.close()
+        render(request,"crudapp/profile.html")
 
 def updateprofile(request):
     if request.method == 'GET':
-        return render(request, "crudapp/updateinformation.html")
+        return render(request, "crudapp/updateprofile.html")
 
 def deleteinformation(request):
     if request.method == 'GET':

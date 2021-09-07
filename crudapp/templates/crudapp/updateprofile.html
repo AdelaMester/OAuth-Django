@@ -1,0 +1,16 @@
+{% extends "crudapp/layout.html" %}
+
+    {% block title %}
+    Update Profile
+    {% endblock %}
+
+{% block main %}
+
+    <form method="post">
+        <input class="form-control" name="Address" placeholder="New Address" type="text"><button type="submit" formaction="/updateprofile">Update Adress</button>
+        <br><br>
+        <input class="form-control" name="Contact_number" placeholder="New Contact Number" type="text"><button type="submit" formaction="/updateprofile">Update Contact Number</button>
+    </form>
+
+
+{% endblock %}
