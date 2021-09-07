@@ -27,6 +27,11 @@ def home(request):
 def profile(request):
     if request.method == 'GET':
         return render(request, "crudapp/profile.html")
+
+
+def updateprofile(request):
+    if request.method == 'GET':
+        return render(request, "crudapp/updateprofile.html")
     if request.method == 'POST':
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
@@ -34,23 +39,14 @@ def profile(request):
             address = request.POST.get('Address')
             cur.execute("UPDATE users SET address =%s WHERE username=%s", (address, request.session['name']))
             conn.commit()
-            cur.close()
-            conn.close()
-            return render(request,"crudapp/profile.html")
         else:
             number = request.POST.get('Contact_number')
             cur.execute("UPDATE users SET contact_number =%s WHERE username=%s", (number, request.session['name']))
             conn.commit()
-            cur.close()
-            conn.close()
-            return render(request,"crudapp/profile.html")
+        cur.close()
+        conn.close()
         return render(request,"crudapp/profile.html")
-    return render(request,"crudapp/profile.html")
 
-
-def updateprofile(request):
-    if request.method == 'GET':
-        return render(request, "crudapp/updateprofile.html")
 
 def deleteinformation(request):
     if request.method == 'GET':
