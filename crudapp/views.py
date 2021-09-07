@@ -44,6 +44,7 @@ def profile(request):
             cur.close()
             conn.close()
             return render(request,"crudapp/profile.html")
+        return render(request,"crudapp/profile.html")
     return render(request,"crudapp/profile.html")
 
 
