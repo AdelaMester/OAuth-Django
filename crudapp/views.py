@@ -44,6 +44,8 @@ def profile(request):
             cur.close()
             conn.close()
             return render(request,"crudapp/profile.html")
+    return render(request,"crudapp/profile.html")
+
 
 def updateprofile(request):
     if request.method == 'GET':
