@@ -120,7 +120,7 @@ def callback(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s", (name,))
         row = cur.fetchone()
-        if not row[0]:
+        if not row:
             cur.execute("INSERT INTO users (username, access_token) VALUES (%s, %s)", (name, at));
             conn.commit()
         cur.close()
