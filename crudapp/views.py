@@ -37,7 +37,7 @@ def profile(request):
             cur.close()
             conn.close()
             return render(request,"crudapp/profile.html")
-        elif request.POST.get('Contact_number'):
+        else:
             number = request.POST.get('Contact_number')
             cur.execute("UPDATE users SET contact_number =%s WHERE username=%s", (number, request.session['name']))
             conn.commit()
