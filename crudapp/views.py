@@ -45,7 +45,7 @@ def updateprofile(request):
             conn.commit()
         cur.close()
         conn.close()
-        return render(request,"crudapp/profile.html")
+        return HttpResponseRedirect("/profile/")
 
 
 def deleteinformation(request):
