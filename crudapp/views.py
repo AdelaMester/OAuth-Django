@@ -29,7 +29,7 @@ def profile(request):
         conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s", (request.session['name'],))
-        profile_info = cur.fetchall()
+        profile_info = cur.fetchone()
         print(profile_info)
         username = profile_info[1]
         address = profile_info[3]
