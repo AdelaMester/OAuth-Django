@@ -30,7 +30,7 @@ def home(request):
 def profile(request):
     if request.method == 'GET':
 
-        # Log in validation, if no login redirect to / route
+        # Log in validation, if no session['name'] redirect to / route
         if 'name' not in request.session:
             return HttpResponseRedirect("/")
 
@@ -58,7 +58,7 @@ def profile(request):
         })
 
 def updateprofile(request):
-    # Log in validation, if no login redirect to / route
+    # Log in validation, if no session['name'] redirect to / route
     if 'name' not in request.session:
             return HttpResponseRedirect("/")
 
@@ -83,7 +83,7 @@ def updateprofile(request):
 
 
 def insertinformation(request):
-    # Log in validation, if no login redirect to / route
+    # Log in validation, if no session['name'] redirect to / route
     if 'name' not in request.session:
             return HttpResponseRedirect("/")
 
@@ -107,7 +107,7 @@ def insertinformation(request):
 
 
 def deleteinformation(request):
-    # Log in validation, if no login redirect to / route
+    # Log in validation, if no session['name'] redirect to / route
     if 'name' not in request.session:
             return HttpResponseRedirect("/")
 
